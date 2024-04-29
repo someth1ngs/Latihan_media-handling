@@ -6,7 +6,7 @@ const path = require("path");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET_KEY } = process.env;
 const { image } = require("../../libs/multer.js");
-const { imageKitUpload } = require("../../controller/v1/media.controllers.js");
+
 
 // Restrict for Authenticate
 let restrict = (req, res, next) => {
@@ -35,6 +35,7 @@ let restrict = (req, res, next) => {
 };
 
 // Required Controller
+const imageKitUpload = require("../../controller/v1/media.controllers.js");
 const userController = require("../../controller/v1/userController.js");
 const authController = require("../../controller/v1/authController.js");
 
@@ -43,7 +44,7 @@ const authController = require("../../controller/v1/authController.js");
 router.post("/api/v1/users", userController.store);
 router.get("/api/v1/users", userController.index);
 router.put("/api/v1/users/:id/users", restrict, userController.update);
-router.post("/api/v1/users/upload", restrict, image.single("file"),imageKitUpload);
+router.post("/api/v1/users/upload", restrict, image.single("file"), imageKitUpload);
 router.put("/api/v1/users/:id/avatar", restrict, userController.avatar);
 
 // API Auth //
