@@ -1,8 +1,4 @@
 const router = require("express").Router();
-const swaggerUI = require("swagger-ui-express");
-const YAML = require("yaml");
-const fs = require("fs");
-const path = require("path");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET_KEY } = process.env;
 const { image } = require("../../libs/multer.js");
@@ -44,8 +40,7 @@ const authController = require("../../controller/v1/authController.js");
 router.post("/api/v1/users", userController.store);
 router.get("/api/v1/users", userController.index);
 router.put("/api/v1/users/:id/users", restrict, userController.update);
-router.post("/api/v1/users/upload", restrict, image.single("file"), imageKitUpload);
-router.put("/api/v1/users/:id/avatar", restrict, userController.avatar);
+router.put("/api/v1/users/:id/avatar", restrict, image.single("file"), userController.avatar);
 
 // API Auth //
 router.post("/api/v1/auth/login", authController.login);

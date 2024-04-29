@@ -1,5 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const imagekit = require("../../libs/imagekit")
+const path = require("path")
 
 module.exports = {
   store: async (req, res, next) => {
@@ -117,14 +119,12 @@ module.exports = {
   avatar: async (req, res, next) => {
     const id = Number(req.params.id);
     try {
-      let imageUrl = req.body.imageUrl;
-      if (!imageUrl) {
-        res.status(400).json({
-          status: false,
-          message: "image must be required",
-          data: null,
-        });
-      }
+      let strFile = req.file.buffer.toString("base64");
+
+      let { url } = await imagekit.upload({
+        fileName: Date.now() + path.extname(req.file.originalname),
+        file: strFile,
+      });
 
       const exist = await prisma.user.findUnique({
         where: { id },
@@ -140,7 +140,7 @@ module.exports = {
 
       const user = await prisma.user.update({
         where: { id },
-        data: { avatar_url: imageUrl },
+        data: { avatar_url: url },
       });
 
       res.status(200).json({
