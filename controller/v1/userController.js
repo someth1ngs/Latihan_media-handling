@@ -48,6 +48,15 @@ module.exports = {
   update: async (req, res, next) => {
     const id = Number(req.params.id);
     try {
+      // Untuk upload dan minta url //
+      let strFile = req.file.buffer.toString("base64");
+
+      let { url } = await imagekit.upload({
+        fileName: Date.now() + path.extname(req.file.originalname),
+        file: strFile,
+      });
+      //////////// batas ////////////
+
       let { first_name, last_name, email, address, occupation } = req.body;
 
       if (!first_name || !last_name || !email || !address || !occupation) {
@@ -77,6 +86,7 @@ module.exports = {
           email,
           address,
           occupation,
+          avatar_url: url
         },
       });
 

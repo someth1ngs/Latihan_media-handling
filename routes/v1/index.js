@@ -31,7 +31,6 @@ let restrict = (req, res, next) => {
 };
 
 // Required Controller
-const imageKitUpload = require("../../controller/v1/media.controllers.js");
 const userController = require("../../controller/v1/userController.js");
 const authController = require("../../controller/v1/authController.js");
 
@@ -39,7 +38,11 @@ const authController = require("../../controller/v1/authController.js");
 // API Users + Profile //
 router.post("/api/v1/users", userController.store);
 router.get("/api/v1/users", userController.index);
-router.put("/api/v1/users/:id/users", restrict, userController.update);
+
+// Buat update semuanya (input semua wajib di isi)
+router.put("/api/v1/users/:id/users", restrict, image.single("file"), userController.update);
+
+// Buat update avatar saja
 router.put("/api/v1/users/:id/avatar", restrict, image.single("file"), userController.avatar);
 
 // API Auth //
