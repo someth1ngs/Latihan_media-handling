@@ -4,7 +4,7 @@ const { JWT_SECRET_KEY } = process.env;
 const { image } = require("../../libs/multer.js");
 
 
-// Restrict for Authenticate
+// Restrict for Authenticate (jika gamau repot login, gausah, hapus aja)
 let restrict = (req, res, next) => {
   let { authorization } = req.headers;
   if (!authorization || !authorization.split(" ")[1]) {
@@ -40,7 +40,7 @@ router.post("/api/v1/users", userController.store);
 router.get("/api/v1/users", userController.index);
 
 // Buat update semuanya (input semua wajib di isi)
-router.put("/api/v1/users/:id/users", restrict, image.single("file"), userController.update);
+router.put("/api/v1/users/:id", restrict, image.single("file"), userController.update);
 
 // Buat update avatar saja
 router.put("/api/v1/users/:id/avatar", restrict, image.single("file"), userController.avatar);

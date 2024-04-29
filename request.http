@@ -15,7 +15,7 @@ Content-Type: application/json
 GET http://localhost:3000/api/v1/users
 
 ### UPDATE - USERS
-PUT http://localhost:3000/api/v1/users/2/users
+PUT http://localhost:3000/api/v1/users/2
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3RfbmFtZSI6IkRld2FuZ2dhIiwibGFzdF9uYW1lIjoiTmFuZGEiLCJlbWFpbCI6ImRld2FuZ2dhQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDUiLCJhZGRyZXNzIjpudWxsLCJvY2N1cGF0aW9uIjpudWxsLCJhdmF0YXJfdXJsIjpudWxsLCJpYXQiOjE3MTQzOTU2NTR9.f9dcAlLaibk86s6kUYywTVe1kzbDfuI-4hDzuZeNeqc
 
@@ -24,7 +24,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3Rfb
     "last_name": "Nanda",
     "email": "Dewangga@gmail.com",
     "address": "Surabaya",
-    "occupation": "Mahasiswa"
+    "occupation": "Mahasiswa"   
 }
 
 ### UPDATE - Avatar
@@ -48,7 +48,7 @@ Content-Type: application/json
 {
     "first_name": "Dewangga",
     "last_name": "Nanda",
-    "email": "dewangga@gmail.com"
+    "email": "Dewangga@gmail.com"
 }
 
 ### GET - Authenticate
